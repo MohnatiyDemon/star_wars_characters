@@ -9,13 +9,32 @@ export default function CharacterDetailPage() {
   const { data: person, isLoading, isError } = useGetPersonQuery(id || '', { skip: !id });
   const [draft, setDraft] = useState<Record<string, string>>({});
   const [dirty, setDirty] = useState(false);
+  const storageKey = id ? `person-edit-${id}` : '';
+
+  useEffect(() => {
+    if (!storageKey) return;
+    try {
+      const raw = localStorage.getItem(storageKey);
+      if (raw) {
+        const parsed = JSON.parse(raw) as Record<string, string>;
+        setDraft(parsed);
+        if (Object.keys(parsed).length > 0) setDirty(true);
+      }
+    } catch (error) {
+      console.error('Error parsing localStorage data:', error);
+    }
+  }, [storageKey]);
 
   useEffect(() => {
     if (person) {
-      setDraft({});
-      setDirty(false);
+      if (!storageKey) return;
+      const hasStored = localStorage.getItem(storageKey);
+      if (!hasStored) {
+        setDraft({});
+        setDirty(false);
+      }
     }
-  }, [person]);
+  }, [person, storageKey]);
 
   if (!id) return <Alert severity="error">Неверный идентификатор</Alert>;
   if (isLoading && !person) return <Stack alignItems="center" py={4}><CircularProgress /></Stack>;
@@ -65,11 +84,29 @@ export default function CharacterDetailPage() {
   const handleReset = () => {
     setDraft({});
     setDirty(false);
+    if (storageKey) localStorage.removeItem(storageKey);
+  };
+
+  const handleSave = () => {
+    if (!storageKey) return;
+    const cleanDraft: Record<string, string> = {};
+    Object.entries(draft).forEach(([k, v]) => {
+      if (v !== '' && v !== String(person[k as keyof typeof person])) cleanDraft[k] = v;
+    });
+    if (Object.keys(cleanDraft).length === 0) {
+      localStorage.removeItem(storageKey);
+      setDirty(false);
+      setDraft({});
+      return;
+    }
+    localStorage.setItem(storageKey, JSON.stringify(cleanDraft));
+    setDraft(cleanDraft);
+    setDirty(false);
   };
 
   return (
     <Stack spacing={2}>
-      <Button component={RouterLink} to="/" size="small" variant="outlined">← Назад</Button>
+      <Button component={RouterLink} to="/" size="small" variant="outlined">Назад</Button>
       <Typography variant="h5" fontWeight={600}>{currentValue('name')}</Typography>
       <Paper sx={{ p: 2 }} variant="outlined">
         <Grid container spacing={2}>
@@ -85,7 +122,8 @@ export default function CharacterDetailPage() {
         </Grid>
         {dirty && (
           <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
-            <Button variant="outlined" onClick={handleReset}>Сбросить изменения</Button>
+            <Button variant="contained" onClick={handleSave}>Сохранить изменения</Button>
+            <Button variant="outlined" onClick={handleReset}>Сбросить</Button>
           </Stack>
         )}
       </Paper>

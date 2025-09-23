@@ -8,7 +8,7 @@ export function Layout({ children }: LayoutProps) {
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <AppBar position="static">
         <Toolbar sx={{ justifyContent: 'center' }}>
-          <Typography variant="h4" textAlign="center">Star Wars Characters</Typography>
+          <Typography variant="h4" textAlign="center">Star Wars</Typography>
         </Toolbar>
       </AppBar>
       <Container
