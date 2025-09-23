@@ -1,24 +1,15 @@
 import { Box } from '@mui/material';
 import { keyframes } from '@emotion/react';
+import { buildStarLayer } from '../utils/starfield';
 
 const drift = keyframes`
   from { transform: translateY(0); }
   to { transform: translateY(1000px); }
 `;
 
-function buildLayer(count: number, spread: number) {
-  const arr: string[] = [];
-  for (let i = 0; i < count; i += 1) {
-    const x = Math.random() * spread;
-    const y = Math.random() * spread;
-    arr.push(`${x}px ${y}px #fff`);
-  }
-  return arr.join(',');
-}
-
-const layer1 = buildLayer(180, 1800);
-const layer2 = buildLayer(120, 1600);
-const layer3 = buildLayer(80, 1400);
+const layer1 = buildStarLayer(180, 1800);
+const layer2 = buildStarLayer(120, 1600);
+const layer3 = buildStarLayer(80, 1400);
 
 export function Starfield() {
   return (

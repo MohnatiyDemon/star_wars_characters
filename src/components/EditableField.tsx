@@ -1,11 +1,5 @@
 import { TextField } from '@mui/material';
-
-interface EditableFieldProps {
-  label: string;
-  value: string;
-  onChange: (val: string) => void;
-  multiline?: boolean;
-}
+import type { EditableFieldProps } from './EditableField.types';
 
 export function EditableField({ label, value, onChange, multiline }: EditableFieldProps) {
   return (

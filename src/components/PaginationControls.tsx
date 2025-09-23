@@ -1,11 +1,6 @@
 import { Pagination, Stack } from '@mui/material';
-
-interface PaginationControlsProps {
-  page: number;
-  total: number;
-  pageSize?: number;
-  onChange: (page: number) => void;
-}
+import type { PaginationControlsProps } from './PaginationControls.types';
+import './PaginationControls.styled.css';
 
 export function PaginationControls({
   page,
@@ -16,7 +11,7 @@ export function PaginationControls({
   const totalPages = Math.ceil(total / pageSize) || 1;
   if (totalPages <= 1) return null;
   return (
-    <Stack alignItems="center" sx={{ my: 2 }}>
+    <Stack className="pagination-controls">
       <Pagination
         count={totalPages}
         page={page}

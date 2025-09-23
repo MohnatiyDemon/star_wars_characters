@@ -1,24 +1,13 @@
 import { AppBar, Toolbar, Container, Box } from '@mui/material';
-import type { ReactNode } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Starfield } from './Starfield';
 import logo from '../../static/star-wars-logo.png';
-
-interface LayoutProps {
-  children: ReactNode;
-}
+import type { LayoutProps } from './Layout.types';
+import './Layout.styled.css';
 
 export function Layout({ children }: LayoutProps) {
   return (
-    <Box
-      sx={{
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: '100vh',
-        zIndex: 1,
-      }}
-    >
+    <Box className="app-layout-root">
       <Starfield />
       <AppBar
         position="sticky"
@@ -29,51 +18,14 @@ export function Layout({ children }: LayoutProps) {
           backdropFilter: 'blur(10px)',
         }}
       >
-        <Toolbar sx={{ position: 'relative', minHeight: 70 }} disableGutters>
-          <Box
-            component={RouterLink}
-            to="/"
-            sx={{
-              position: 'absolute',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              display: 'inline-flex',
-              alignItems: 'center',
-              textDecoration: 'none',
-            }}
-          >
-            <Box
-              component="img"
-              src={logo}
-              alt="Star Wars"
-              sx={{ height: 50, width: 'auto', filter: 'drop-shadow(0 0 6px rgba(255,193,7,0.5))' }}
-            />
+        <Toolbar className="app-layout-toolbar" disableGutters>
+          <Box component={RouterLink} to="/" className="app-layout-logo-link">
+            <Box component="img" src={logo} alt="Star Wars" className="app-layout-logo-img" />
           </Box>
         </Toolbar>
-        <Box
-          sx={{
-            height: 3,
-            background: 'linear-gradient(90deg,#ffc107 0%, #16e0ff 50%, #ffc107 100%)',
-            opacity: 0.5,
-          }}
-        />
+        <Box className="app-layout-gradient-bar" />
       </AppBar>
-      <Container
-        sx={{
-          position: 'relative',
-          py: 4,
-          flexGrow: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-          maxWidth: '1200px !important',
-          mx: 'auto',
-          width: '100%',
-          minHeight: { xs: 'unset', md: '600px' },
-          zIndex: 2,
-        }}
-      >
+      <Container className="app-layout-container" sx={{ maxWidth: '1200px !important' }}>
         {children}
       </Container>
     </Box>

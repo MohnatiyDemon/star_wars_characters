@@ -1,23 +1,17 @@
 import { Card, CardActionArea, CardContent, Typography, Stack } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import type { Person } from '../store/types';
-
-interface CharacterListItemProps {
-  person: Person;
-}
+import type { CharacterListItemProps } from './CharacterListItem.types';
+import './CharacterListItem.styled.css';
 
 export function CharacterListItem({ person }: CharacterListItemProps) {
   return (
-    <Card
-      variant="outlined"
-      sx={{ display: 'flex', flexDirection: 'column', width: 260, minHeight: 140 }}
-    >
+    <Card variant="outlined" className="character-card">
       <CardActionArea
         component={RouterLink}
         to={`/character/${person.id}`}
-        sx={{ flexGrow: 1, alignItems: 'stretch' }}
+        className="character-card__content-wrapper"
       >
-        <CardContent sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <CardContent className="character-card__content">
           <Stack spacing={0.75} flexGrow={1}>
             <Typography variant="subtitle1" fontWeight={600} noWrap>
               {person.name}
@@ -28,7 +22,7 @@ export function CharacterListItem({ person }: CharacterListItemProps) {
             <Typography variant="body2" color="text.secondary">
               Рост: {person.height}
             </Typography>
-            <Typography variant="caption" color="text.disabled" sx={{ mt: 'auto' }}>
+            <Typography variant="caption" color="text.disabled" className="character-card__id">
               #{person.id}
             </Typography>
           </Stack>

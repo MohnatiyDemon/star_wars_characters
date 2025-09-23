@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useGetPersonQuery } from '../store/swapiApi';
 import { Stack, Typography, CircularProgress, Alert, Button, Grid, Paper } from '@mui/material';
 import { EditableField } from '../components/EditableField';
+import { PERSON_LABELS, EDITABLE_PERSON_FIELDS, mapGender } from '../utils/personDetail';
 
 export default function CharacterDetailPage() {
   const { id } = useParams();
@@ -46,38 +47,9 @@ export default function CharacterDetailPage() {
   if (isError) return <Alert severity="error">Ошибка загрузки</Alert>;
   if (!person) return <Alert severity="warning">Персонаж не найден</Alert>;
 
-  const labels: Record<string, string> = {
-    name: 'Имя',
-    height: 'Рост',
-    mass: 'Масса',
-    hair_color: 'Цвет волос',
-    skin_color: 'Цвет кожи',
-    eye_color: 'Цвет глаз',
-    birth_year: 'Год рождения',
-    gender: 'Пол',
-  };
-
-  const genderMap: Record<string, string> = {
-    male: 'мужской',
-    female: 'женский',
-    'n/a': 'н/д',
-    unknown: 'неизвестно',
-  };
-
-  const editableFields: (keyof typeof person)[] = [
-    'name',
-    'height',
-    'mass',
-    'hair_color',
-    'skin_color',
-    'eye_color',
-    'birth_year',
-    'gender',
-  ];
-
   const currentValue = (field: keyof typeof person) => {
     const value = field in draft ? draft[field as string] : String(person[field]);
-    if (field === 'gender') return genderMap[value] || value;
+    if (field === 'gender') return mapGender(value);
     return value;
   };
 
@@ -119,10 +91,10 @@ export default function CharacterDetailPage() {
       </Typography>
       <Paper sx={{ p: 2 }} variant="outlined">
         <Grid container spacing={2}>
-          {editableFields.map((f) => (
+          {EDITABLE_PERSON_FIELDS.map((f) => (
             <Grid key={f} size={{ xs: 12, sm: 6 }}>
               <EditableField
-                label={labels[f] || f}
+                label={PERSON_LABELS[f] || f}
                 value={currentValue(f)}
                 onChange={(v) => handleChange(f, v)}
               />

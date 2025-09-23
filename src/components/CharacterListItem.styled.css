@@ -1,0 +1,24 @@
+.character-card {
+  display: flex;
+  flex-direction: column;
+  width: 260px;
+  min-height: 140px;
+}
+
+.character-card__content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: stretch;
+  height: 100%;
+}
+
+.character-card__content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.character-card__id {
+  margin-top: auto;
+}

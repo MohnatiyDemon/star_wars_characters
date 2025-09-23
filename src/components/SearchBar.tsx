@@ -2,12 +2,7 @@ import { TextField, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useEffect, useState } from 'react';
 import { useDebounce } from '../hooks/useDebounce';
-
-interface SearchBarProps {
-  value: string;
-  onChange: (val: string) => void;
-  placeholder?: string;
-}
+import type { SearchBarProps } from './SearchBar.types';
 
 export function SearchBar({ value, onChange, placeholder = 'Поиск по имени' }: SearchBarProps) {
   const [local, setLocal] = useState(value);
