@@ -2,7 +2,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { PeopleApiResponse, Person } from './types';
 import { extractIdFromUrl } from '../utils/extractIdFromUrl';
 
-interface GetPeopleArgs { page: number; search: string }
+interface GetPeopleArgs {
+  page: number;
+  search: string;
+}
 interface GetPeopleResult {
   ids: string[];
   entities: Record<string, Person>;

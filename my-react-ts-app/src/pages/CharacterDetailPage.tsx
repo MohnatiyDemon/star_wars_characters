@@ -37,7 +37,12 @@ export default function CharacterDetailPage() {
   }, [person, storageKey]);
 
   if (!id) return <Alert severity="error">Неверный идентификатор</Alert>;
-  if (isLoading && !person) return <Stack alignItems="center" py={4}><CircularProgress /></Stack>;
+  if (isLoading && !person)
+    return (
+      <Stack alignItems="center" py={4}>
+        <CircularProgress />
+      </Stack>
+    );
   if (isError) return <Alert severity="error">Ошибка загрузки</Alert>;
   if (!person) return <Alert severity="warning">Персонаж не найден</Alert>;
 
@@ -106,8 +111,12 @@ export default function CharacterDetailPage() {
 
   return (
     <Stack spacing={2}>
-      <Button component={RouterLink} to="/" size="small" variant="outlined">Назад</Button>
-      <Typography variant="h5" fontWeight={600}>{currentValue('name')}</Typography>
+      <Button component={RouterLink} to="/" size="small" variant="outlined">
+        Назад
+      </Button>
+      <Typography variant="h5" fontWeight={600}>
+        {currentValue('name')}
+      </Typography>
       <Paper sx={{ p: 2 }} variant="outlined">
         <Grid container spacing={2}>
           {editableFields.map((f) => (
@@ -122,8 +131,12 @@ export default function CharacterDetailPage() {
         </Grid>
         {dirty && (
           <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
-            <Button variant="contained" onClick={handleSave}>Сохранить изменения</Button>
-            <Button variant="outlined" onClick={handleReset}>Сбросить</Button>
+            <Button variant="contained" onClick={handleSave}>
+              Сохранить изменения
+            </Button>
+            <Button variant="outlined" onClick={handleReset}>
+              Сбросить
+            </Button>
           </Stack>
         )}
       </Paper>

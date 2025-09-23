@@ -1,4 +1,11 @@
-import { ThemeProvider, createTheme, CssBaseline, responsiveFontSizes, CircularProgress, Box } from '@mui/material';
+import {
+  ThemeProvider,
+  createTheme,
+  CssBaseline,
+  responsiveFontSizes,
+  CircularProgress,
+  Box,
+} from '@mui/material';
 import { Layout } from './components/Layout';
 import { Routes, Route } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
@@ -70,11 +77,11 @@ export default function App() {
       <CssBaseline />
       <Layout>
         <Suspense
-          fallback={(
+          fallback={
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', py: 10 }}>
               <CircularProgress />
             </Box>
-          )}
+          }
         >
           <Routes>
             <Route path="/" element={<CharactersPage />} />

@@ -4,11 +4,21 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Starfield } from './Starfield';
 import logo from '../../static/star-wars-logo.png';
 
-interface LayoutProps { children: ReactNode }
+interface LayoutProps {
+  children: ReactNode;
+}
 
 export function Layout({ children }: LayoutProps) {
   return (
-    <Box sx={{ position: 'relative', display: 'flex', flexDirection: 'column', minHeight: '100vh', zIndex: 1 }}>
+    <Box
+      sx={{
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+        zIndex: 1,
+      }}
+    >
       <Starfield />
       <AppBar
         position="sticky"
@@ -20,27 +30,33 @@ export function Layout({ children }: LayoutProps) {
         }}
       >
         <Toolbar sx={{ position: 'relative', minHeight: 70 }} disableGutters>
-  <Box
-    component={RouterLink}
-    to="/"
-    sx={{
-      position: 'absolute',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      display: 'inline-flex',
-      alignItems: 'center',
-      textDecoration: 'none',
-    }}
-  >
-    <Box
-      component="img"
-      src={logo}
-      alt="Star Wars"
-      sx={{ height: 50, width: 'auto', filter: 'drop-shadow(0 0 6px rgba(255,193,7,0.5))' }}
-    />
-  </Box>
-</Toolbar>
-        <Box sx={{ height: 3, background: 'linear-gradient(90deg,#ffc107 0%, #16e0ff 50%, #ffc107 100%)', opacity: 0.5 }} />
+          <Box
+            component={RouterLink}
+            to="/"
+            sx={{
+              position: 'absolute',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              textDecoration: 'none',
+            }}
+          >
+            <Box
+              component="img"
+              src={logo}
+              alt="Star Wars"
+              sx={{ height: 50, width: 'auto', filter: 'drop-shadow(0 0 6px rgba(255,193,7,0.5))' }}
+            />
+          </Box>
+        </Toolbar>
+        <Box
+          sx={{
+            height: 3,
+            background: 'linear-gradient(90deg,#ffc107 0%, #16e0ff 50%, #ffc107 100%)',
+            opacity: 0.5,
+          }}
+        />
       </AppBar>
       <Container
         sx={{

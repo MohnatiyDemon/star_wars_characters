@@ -17,7 +17,8 @@ export default function CharactersPage() {
   const handleSearchChange = (val: string) => {
     setParams((prev) => {
       const next = new URLSearchParams(prev);
-      if (val) next.set('search', val); else next.delete('search');
+      if (val) next.set('search', val);
+      else next.delete('search');
       next.set('page', '1');
       return next;
     });
@@ -37,11 +38,13 @@ export default function CharactersPage() {
       <Box sx={{ minHeight: 40 }}>
         <SearchBar value={search} onChange={handleSearchChange} />
       </Box>
-    {isError && <Alert severity="error">Произошла ошибка загрузки</Alert>}
-  {loading && people.length === 0 && (
-        <Stack alignItems="center" py={4}><CircularProgress /></Stack>
+      {isError && <Alert severity="error">Произошла ошибка загрузки</Alert>}
+      {loading && people.length === 0 && (
+        <Stack alignItems="center" py={4}>
+          <CircularProgress />
+        </Stack>
       )}
-  {!loading && people.length === 0 && !isError && (
+      {!loading && people.length === 0 && !isError && (
         <Typography variant="body1">Ничего не найдено.</Typography>
       )}
       <Fade in={people.length > 0 || loading}>
