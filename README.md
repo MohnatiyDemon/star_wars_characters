@@ -2,6 +2,10 @@
 
 Мини‑приложение для просмотра персонажей Star Wars (SWAPI): список, поиск, пагинация, страница персонажа с локальным редактированием полей (сохранение в `localStorage`).
 
+### Демо
+Основной: https://star-wars-characters-hazel.vercel.app/
+Альтернативный: https://star-wars-characters-git-main-tamerlans-projects-75706c33.vercel.app/
+
 ### Технологии
 React 19, TypeScript, Vite, Redux Toolkit (RTK Query), React Router, MUI.
 
