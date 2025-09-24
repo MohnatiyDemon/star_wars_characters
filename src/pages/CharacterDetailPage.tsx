@@ -49,7 +49,12 @@ export default function CharacterDetailPage() {
         <CircularProgress />
       </Stack>
     );
-  if (isError) return <Alert severity="error">Ошибка загрузки</Alert>;
+  if (isError)
+    return (
+      <Alert severity="error">
+        Не удалось загрузить данные. Проверьте подключение к интернету.
+      </Alert>
+    );
   if (!person) return <Alert severity="warning">Персонаж не найден</Alert>;
 
   const currentValue = (field: keyof typeof person) => {
@@ -88,7 +93,9 @@ export default function CharacterDetailPage() {
 
   return (
     <Stack spacing={2}>
-      <Button onClick={handleBack} size="small" variant="outlined">Назад</Button>
+      <Button onClick={handleBack} size="small" variant="outlined">
+        Назад
+      </Button>
       <Typography variant="h5" fontWeight={600}>
         {currentValue('name')}
       </Typography>

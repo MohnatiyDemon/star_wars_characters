@@ -35,8 +35,12 @@ export default function CharactersPage() {
         <SearchBar value={search} onChange={handleSearchChange} />
       </div>
       <div className="characters-list-wrapper">
-        <div className={`characters-list${showOverlayLoader ? ' characters-list--loading' : ''}`}> 
-          {isError && <Alert severity="error">Произошла ошибка загрузки</Alert>}
+        <div className={`characters-list${showOverlayLoader ? ' characters-list--loading' : ''}`}>
+          {isError && (
+            <Alert severity="error">
+              Не удалось загрузить данные. Проверьте подключение к интернету.
+            </Alert>
+          )}
           {showInitialLoader && (
             <Stack alignItems="center" py={4} width="100%">
               <CircularProgress />

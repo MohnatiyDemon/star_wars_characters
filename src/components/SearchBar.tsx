@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useDebounce } from '../hooks/useDebounce';
 import type { SearchBarProps } from './SearchBar.types';
 
-export function SearchBar({ value, onChange, placeholder = 'Поиск по имени' }: SearchBarProps) {
+export function SearchBar({ value, onChange, placeholder = 'Поиск персонажей' }: SearchBarProps) {
   const [local, setLocal] = useState(value);
   const debounced = useDebounce(local, 400);
 
