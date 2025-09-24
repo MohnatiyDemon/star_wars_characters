@@ -1,0 +1,19 @@
+.characters-search {
+  min-height: 40px;
+}
+
+.characters-list-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.characters-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 420px;
+  justify-content: center;
+}

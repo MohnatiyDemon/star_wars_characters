@@ -1,17 +1,18 @@
 import { useSearchParams } from 'react-router-dom';
 import { useGetPeopleQuery } from '../store/swapiApi';
-import { CircularProgress, Alert, Stack, Typography, Fade, Box } from '@mui/material';
+import { CircularProgress, Alert, Stack, Typography, Fade } from '@mui/material';
 import { SearchBar } from '../components/SearchBar';
 import { PaginationControls } from '../components/PaginationControls';
 import { CharacterListItem } from '../components/CharacterListItem';
+import './CharactersPage.styled.css';
 
 export default function CharactersPage() {
   const [params, setParams] = useSearchParams();
   const page = Math.max(parseInt(params.get('page') || '1', 10), 1);
   const search = params.get('search') || '';
   const { data, isLoading, isError, isFetching } = useGetPeopleQuery({ page, search });
-  const people = (data?.ids || []).map((id) => data!.entities[id]);
-  const total = data?.total || 0;
+  const people = data ? data.ids.map((id) => data.entities[id]) : [];
+  const total = data?.total ?? 0;
   const loading = isLoading || isFetching;
 
   const handleSearchChange = (val: string) => {
@@ -28,9 +29,9 @@ export default function CharactersPage() {
 
   return (
     <Stack spacing={2}>
-      <Box sx={{ minHeight: 40 }}>
+      <div className="characters-search">
         <SearchBar value={search} onChange={handleSearchChange} />
-      </Box>
+      </div>
       {isError && <Alert severity="error">Произошла ошибка загрузки</Alert>}
       {loading && people.length === 0 && (
         <Stack alignItems="center" py={4}>
@@ -41,25 +42,13 @@ export default function CharactersPage() {
         <Typography variant="body1">Ничего не найдено.</Typography>
       )}
       <Fade in={people.length > 0 || loading}>
-        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: 2,
-              width: '100%',
-              maxWidth: 1200,
-              minHeight: 420,
-              justifyContent: 'center',
-            }}
-          >
+        <div className="characters-list-wrapper">
+          <div className="characters-list">
             {people.map((p) => (
-              <Box key={p.id} sx={{ flex: '0 0 auto' }}>
-                <CharacterListItem person={p} />
-              </Box>
+              <CharacterListItem key={p.id} person={p} />
             ))}
-          </Box>
-        </Box>
+          </div>
+        </div>
       </Fade>
       <PaginationControls page={page} total={total} onChange={handlePageChange} />
     </Stack>
