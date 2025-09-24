@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Container, Box } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { Starfield } from './Starfield';
-import logo from '../../static/star-wars-logo.png';
+import logo from '../assets/star-wars-logo.png';
 import type { LayoutProps } from './Layout.types';
 import './Layout.styled.css';
 
