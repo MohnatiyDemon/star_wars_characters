@@ -28,28 +28,20 @@ export default function CharactersPage() {
   };
 
   return (
-    <Stack spacing={2} className="characters-page" sx={{ width: '100%' }}>
+    <Stack spacing={2}>
       <div className="characters-search">
         <SearchBar value={search} onChange={handleSearchChange} />
       </div>
       <div className="characters-list-wrapper">
         <div className="characters-list">
+          {isError && <Alert severity="error">Произошла ошибка загрузки</Alert>}
           {loading && (
-            <div className="characters-list__overlay-loader">
-              <CircularProgress size={42} />
-            </div>
-          )}
-          {isError && (
-            <div className="characters-list__empty">
-              <Alert severity="error" sx={{ width: '100%', maxWidth: 400, justifySelf: 'center' }}>
-                Не удалось загрузить данные. Проверьте подключение к интернету.
-              </Alert>
-            </div>
+            <Stack alignItems="center" py={4} width="100%">
+              <CircularProgress />
+            </Stack>
           )}
           {!loading && !isError && people.length === 0 && (
-            <div className="characters-list__empty">
-              <Typography variant="body1">Ничего не найдено.</Typography>
-            </div>
+            <Typography variant="body1">Ничего не найдено.</Typography>
           )}
           <Fade in={people.length > 0} unmountOnExit>
             <div style={{ display: 'contents' }}>
