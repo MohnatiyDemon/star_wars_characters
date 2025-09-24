@@ -15,22 +15,15 @@ export default function CharactersPage() {
   const loading = isLoading || isFetching;
 
   const handleSearchChange = (val: string) => {
-    setParams((prev) => {
-      const next = new URLSearchParams(prev);
-      if (val) next.set('search', val);
-      else next.delete('search');
-      next.set('page', '1');
-      return next;
-    });
+    const entries: [string, string][] = [['page', '1']];
+    if (val) entries.push(['search', val]);
+    setParams(entries);
   };
 
   const handlePageChange = (p: number) => {
-    setParams((prev) => {
-      const next = new URLSearchParams(prev);
-      next.set('page', String(p));
-      if (search) next.set('search', search);
-      return next;
-    });
+    const entries: [string, string][] = [['page', String(p)]];
+    if (search) entries.push(['search', search]);
+    setParams(entries);
   };
 
   return (
