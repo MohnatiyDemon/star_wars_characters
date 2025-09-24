@@ -35,7 +35,7 @@ export default function CharactersPage() {
         <SearchBar value={search} onChange={handleSearchChange} />
       </div>
       <div className="characters-list-wrapper">
-        <div className="characters-list">
+        <div className={`characters-list${showOverlayLoader ? ' characters-list--loading' : ''}`}> 
           {isError && <Alert severity="error">Произошла ошибка загрузки</Alert>}
           {showInitialLoader && (
             <Stack alignItems="center" py={4} width="100%">

@@ -22,12 +22,18 @@
 .characters-list__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
-  border-radius: 4px;
+  z-index: 3;
   pointer-events: none;
+}
+
+.characters-list--loading .character-card {
+  filter: blur(2px) saturate(70%);
+  transition: filter 0.25s ease;
+}
+
+.characters-list--loading .character-card:hover {
+  filter: blur(2px) saturate(70%);
 }
