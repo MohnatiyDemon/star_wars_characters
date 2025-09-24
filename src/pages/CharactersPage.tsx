@@ -32,24 +32,26 @@ export default function CharactersPage() {
       <div className="characters-search">
         <SearchBar value={search} onChange={handleSearchChange} />
       </div>
-      {isError && <Alert severity="error">Произошла ошибка загрузки</Alert>}
-      {loading && people.length === 0 && (
-        <Stack alignItems="center" py={4}>
-          <CircularProgress />
-        </Stack>
-      )}
-      {!loading && people.length === 0 && !isError && (
-        <Typography variant="body1">Ничего не найдено.</Typography>
-      )}
-      <Fade in={people.length > 0 || loading}>
-        <div className="characters-list-wrapper">
-          <div className="characters-list">
-            {people.map((p) => (
-              <CharacterListItem key={p.id} person={p} />
-            ))}
-          </div>
+      <div className="characters-list-wrapper">
+        <div className="characters-list">
+          {isError && <Alert severity="error">Произошла ошибка загрузки</Alert>}
+          {loading && (
+            <Stack alignItems="center" py={4} width="100%">
+              <CircularProgress />
+            </Stack>
+          )}
+          {!loading && !isError && people.length === 0 && (
+            <Typography variant="body1">Ничего не найдено.</Typography>
+          )}
+          <Fade in={people.length > 0} unmountOnExit>
+            <div style={{ display: 'contents' }}>
+              {people.map((p) => (
+                <CharacterListItem key={p.id} person={p} />
+              ))}
+            </div>
+          </Fade>
         </div>
-      </Fade>
+      </div>
       <PaginationControls page={page} total={total} onChange={handlePageChange} />
     </Stack>
   );

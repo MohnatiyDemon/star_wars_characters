@@ -1,7 +1,7 @@
 export const PERSON_LABELS: Record<string, string> = {
   name: 'Имя',
   height: 'Рост',
-  mass: 'Масса',
+  mass: 'Вес',
   hair_color: 'Цвет волос',
   skin_color: 'Цвет кожи',
   eye_color: 'Цвет глаз',
