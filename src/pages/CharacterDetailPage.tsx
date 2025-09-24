@@ -1,4 +1,4 @@
-import { useParams, Link as RouterLink } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useGetPersonQuery } from '../store/swapiApi';
 import { Stack, Typography, CircularProgress, Alert, Button, Grid, Paper } from '@mui/material';
@@ -7,6 +7,11 @@ import { PERSON_LABELS, EDITABLE_PERSON_FIELDS, mapGender } from '../utils/perso
 
 export default function CharacterDetailPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const handleBack = () => {
+    if (window.history.length > 1) navigate(-1);
+    else navigate('/');
+  };
   const { data: person, isLoading, isError } = useGetPersonQuery(id || '', { skip: !id });
   const [draft, setDraft] = useState<Record<string, string>>({});
   const [dirty, setDirty] = useState(false);
@@ -83,9 +88,7 @@ export default function CharacterDetailPage() {
 
   return (
     <Stack spacing={2}>
-      <Button component={RouterLink} to="/" size="small" variant="outlined">
-        Назад
-      </Button>
+      <Button onClick={handleBack} size="small" variant="outlined">Назад</Button>
       <Typography variant="h5" fontWeight={600}>
         {currentValue('name')}
       </Typography>

@@ -1,16 +1,19 @@
 import { Card, CardActionArea, CardContent, Typography, Stack } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import type { CharacterListItemProps } from './CharacterListItem.types';
 import './CharacterListItem.styled.css';
 import { mergePersonWithEdits } from '../utils/personEdits';
 
 export function CharacterListItem({ person }: CharacterListItemProps) {
   const merged = mergePersonWithEdits(person);
+  const location = useLocation();
+  const from = { pathname: location.pathname, search: location.search };
   return (
     <Card variant="outlined" className="character-card">
       <CardActionArea
         component={RouterLink}
         to={`/character/${merged.id}`}
+        state={{ from }}
         className="character-card__content-wrapper"
       >
         <CardContent className="character-card__content">
