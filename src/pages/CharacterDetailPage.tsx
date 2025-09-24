@@ -17,7 +17,7 @@ export default function CharacterDetailPage() {
     try {
       const raw = localStorage.getItem(storageKey);
       if (raw) {
-        const parsed = JSON.parse(raw) as Record<string, string>;
+        const parsed = JSON.parse(raw);
         setDraft(parsed);
         if (Object.keys(parsed).length > 0) setDirty(true);
       }
@@ -48,7 +48,7 @@ export default function CharacterDetailPage() {
   if (!person) return <Alert severity="warning">Персонаж не найден</Alert>;
 
   const currentValue = (field: keyof typeof person) => {
-    const value = field in draft ? draft[field as string] : String(person[field]);
+    const value = field in draft ? draft[field] : String(person[field]);
     if (field === 'gender') return mapGender(value);
     return value;
   };
