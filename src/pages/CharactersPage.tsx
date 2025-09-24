@@ -14,6 +14,8 @@ export default function CharactersPage() {
   const people = data ? data.ids.map((id) => data.entities[id]) : [];
   const total = data?.total ?? 0;
   const loading = isLoading || isFetching;
+  const showInitialLoader = loading && people.length === 0;
+  const showOverlayLoader = loading && people.length > 0;
 
   const handleSearchChange = (val: string) => {
     const entries: [string, string][] = [['page', '1']];
@@ -35,7 +37,7 @@ export default function CharactersPage() {
       <div className="characters-list-wrapper">
         <div className="characters-list">
           {isError && <Alert severity="error">Произошла ошибка загрузки</Alert>}
-          {loading && (
+          {showInitialLoader && (
             <Stack alignItems="center" py={4} width="100%">
               <CircularProgress />
             </Stack>
@@ -50,6 +52,11 @@ export default function CharactersPage() {
               ))}
             </div>
           </Fade>
+          {showOverlayLoader && (
+            <div className="characters-list__overlay">
+              <CircularProgress />
+            </div>
+          )}
         </div>
       </div>
       <PaginationControls page={page} total={total} onChange={handlePageChange} />
