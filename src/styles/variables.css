@@ -1,0 +1,27 @@
+:root {
+  --color-primary: #ffc107;
+  --color-primary-rgb: 255, 193, 7;
+  --color-secondary: #16e0ff;
+  --color-secondary-rgb: 22, 224, 255;
+  --color-bg-default: #05060a;
+  --color-bg-paper: rgba(20, 22, 30, 0.72);
+  --color-bg-elevated: #1a1a1a;
+  --color-bg-alt: #242424;
+  --color-divider: rgba(255, 255, 255, 0.08);
+  --color-success: #4caf50;
+  --color-warning: #ff9800;
+  --color-error: #ef5350;
+  --color-link: #646cff;
+  --color-link-hover: #535bf2;
+  --color-border-focus: #646cff;
+  --color-text-invert: #000;
+  --color-text-bright: #ffffff;
+  --color-glass-a: rgba(40, 45, 60, 0.65);
+  --color-glass-b: rgba(10, 12, 18, 0.65);
+  --color-appbar-a: rgba(10, 12, 18, 0.85);
+  --color-appbar-b: rgba(40, 45, 60, 0.85);
+  --color-border-subtle: rgba(255, 255, 255, 0.12);
+  --color-border-strong: rgba(255, 255, 255, 0.04);
+  --color-shadow-strong: rgba(0, 0, 0, 0.6);
+  --color-star: #fff;
+}
