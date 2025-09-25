@@ -13,9 +13,8 @@
   flex-wrap: wrap;
   gap: 16px;
   width: 100%;
-  max-width: 1200px;
-  min-height: 420px;
   justify-content: center;
+  align-items: center;
   position: relative;
 }
 
