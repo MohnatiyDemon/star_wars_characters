@@ -23,12 +23,14 @@ export function SearchBar({ value, onChange, placeholder = 'Поиск перс�
       value={local}
       onChange={(e) => setLocal(e.target.value)}
       placeholder={placeholder}
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <SearchIcon fontSize="small" />
-          </InputAdornment>
-        ),
+      slotProps={{
+        input: {
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon fontSize="small" />
+            </InputAdornment>
+          ),
+        },
       }}
     />
   );
